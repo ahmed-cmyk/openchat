@@ -1,7 +1,7 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
 fn send_to_rust(message: String) -> String {
-    format!("Rust received: {}", message)
+    format!("user: {}", message)
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
