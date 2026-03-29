@@ -9,6 +9,8 @@ function App() {
   const isButtonDisabled = !message;
 
   async function chat() {
+    if (!message.trim()) return;
+
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
     setMessageList([...messageList, await invoke("send_to_rust", { message })]);
     setMessage("");
