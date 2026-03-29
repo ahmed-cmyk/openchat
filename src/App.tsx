@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
 
@@ -13,6 +13,21 @@ function App() {
     setMessageList([...messageList, await invoke("send_to_rust", { message })]);
     setMessage("");
   }
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    // Check for Cmd+Enter or Ctrl+Enter
+    if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) {
+      event.preventDefault();
+
+      // Cast event.currentTarget or event.target to HTMLTextAreaElement
+      const target = event.currentTarget as HTMLTextAreaElement;
+
+      if (target.form) {
+        // Use `requestSubmit` to ensure the onSubmitHandler is called
+        target.form.requestSubmit();
+      }
+    }
+  };
 
   return (
     <main className="container">
@@ -31,10 +46,11 @@ function App() {
           chat();
         }}
       >
-        <input
+        <textarea
           id="message-input"
           value={message}
           onChange={(e) => setMessage(e.currentTarget.value)}
+          onKeyDown={handleKeyDown}
           autoComplete="off"
           placeholder="Enter a message..."
         />

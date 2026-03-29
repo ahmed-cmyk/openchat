@@ -90,6 +90,10 @@ h6 {
 
 .prompt-container {
     display: flex;
+    position: fixed;
+    bottom: 10px;
+    left: 5px;
+    right: 5px;
     width: 100%;
     align-items: center;
     gap: 8px;
@@ -97,6 +101,15 @@ h6 {
 
 #message-input {
     flex: 1;
+    background: #070d0d;
+    border: 1px solid #1e2929;
+    border-radius: 16px;
+    color: #ececec;
+    padding: 12px 16px;
+}
+
+#message-input:focus {
+    outline: none;
 }
 
 .chat-button {
@@ -172,10 +185,6 @@ button:active {
 input,
 button {
     outline: none;
-}
-
-#message-input {
-    margin-right: 5px;
 }
 
 @media (prefers-color-scheme: dark) {
